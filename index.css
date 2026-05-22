@@ -404,6 +404,74 @@ header .logo {
   z-index: 10;
 }
 
+/* Dashboard External Callout */
+.dash-callout {
+  position: absolute;
+  right: calc(100% + 30px);
+  left: auto;
+  top: 60px;
+  width: 170px;
+  background: rgba(11, 17, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(3, 254, 179, 0.25);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(3, 254, 179, 0.05);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  animation: float-callout 4s ease-in-out infinite;
+}
+
+@keyframes float-callout {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.dash-callout-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--brand-mint-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dash-callout-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--brand-mint-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--brand-mint-bright);
+}
+
+.dash-callout-text {
+  font-size: 0.75rem;
+  color: var(--text-light-muted);
+  line-height: 1.3;
+}
+
+.callout-arrow {
+  position: absolute;
+  right: -36px;
+  left: auto;
+  top: 10px;
+  width: 38px;
+  height: 30px;
+  overflow: visible;
+  pointer-events: none;
+  transform: scaleX(-1);
+  filter: drop-shadow(0 2px 3px rgba(11, 17, 15, 0.3)) drop-shadow(0 0.5px 1px rgba(11, 17, 15, 0.4));
+}
+
 .mockup-inner {
   background-color: var(--bg-dark);
   border-radius: calc(var(--radius-lg) - 4px);
@@ -1318,7 +1386,7 @@ footer {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 4rem;
   margin-bottom: 4rem;
 }
@@ -1429,5 +1497,12 @@ footer {
     flex-direction: column;
     gap: 1.5rem;
     align-items: flex-start;
+  }
+}
+
+/* Responsive Hide for Dashboard Callout */
+@media (max-width: 1280px) {
+  .dash-callout {
+    display: none;
   }
 }
