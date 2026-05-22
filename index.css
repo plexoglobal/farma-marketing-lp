@@ -450,13 +450,35 @@ header .logo {
   border: 1px solid var(--border-dark);
 }
 
+@keyframes status-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+    box-shadow: 0 0 8px var(--brand-mint-bright);
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
 .dash-status {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--brand-mint-bright);
-  font-weight: 500;
+  font-weight: 600;
+  background-color: rgba(3, 254, 179, 0.05);
+  border: 1px solid rgba(3, 254, 179, 0.15);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .dash-status::before {
@@ -465,7 +487,7 @@ header .logo {
   height: 6px;
   background-color: var(--brand-mint-bright);
   border-radius: 50%;
-  box-shadow: 0 0 6px var(--brand-mint-bright);
+  animation: status-pulse 2s infinite ease-in-out;
 }
 
 /* Dashboard Body */
@@ -493,27 +515,65 @@ header .logo {
   list-style: none;
 }
 
+.sidebar-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-mint-bright);
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding-left: 0.5rem;
+}
+
 .sidebar-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
   border-radius: var(--radius-sm);
   color: var(--text-light-muted);
   font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition-fast);
+  position: relative;
+}
+
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  left: 0.3rem;
+  top: 25%;
+  height: 50%;
+  width: 2px;
+  background-color: var(--brand-mint-bright);
+  border-radius: 2px;
+  opacity: 0;
+  transition: var(--transition-fast);
 }
 
 .sidebar-item.active {
-  background-color: rgba(3, 254, 179, 0.08);
+  background-color: rgba(3, 254, 179, 0.06);
   color: var(--brand-mint-bright);
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.sidebar-item.active::before {
+  opacity: 1;
+  box-shadow: 0 0 6px var(--brand-mint-bright);
 }
 
 .sidebar-item:hover:not(.active) {
   color: var(--text-light);
   background-color: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-item:hover:not(.active)::before {
+  opacity: 0.4;
 }
 
 .sidebar-item svg {
@@ -536,7 +596,9 @@ header .logo {
 }
 
 .dash-pane.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .dash-metrics {
